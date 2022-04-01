@@ -169,12 +169,37 @@ std::string     ToString( float value );
 class vec3
 {
 public:
+	vec3( float x, float y, float z ):
+		x(x), y(y), z(z)
+	{}
+
+	vec3()
+	{}
+
 	float x{}, y{}, z{};
 
 	constexpr float operator[]( int i )
 	{
 		// index into memory where vars are stored, and clamp to not read garbage
 		return *(&x + std::clamp( i, 0, 2 ));
+	}
+
+	constexpr void operator=( const vec3& other )
+	{
+		// Guard self assignment
+		if (this == &other)
+			return;
+
+		std::memcpy( &x, &other.x, sizeof( vec3 ) );
+	}
+
+	constexpr bool operator==( const vec3& other )
+	{
+		// Guard self assignment
+		if (this == &other)
+			return true;
+
+		return !(std::memcmp( &x, &other.x, sizeof( vec3 ) ));
 	}
 };
 
