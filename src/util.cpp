@@ -207,3 +207,60 @@ std::string ToString( float value )
 	return oss.str();
 }
 
+
+// ==============================================================================
+// Filesystem functions
+
+
+bool fs_is_file( const char* path )
+{
+	struct stat s;
+	if ( stat( path, &s ) == 0 )
+		return (s.st_mode & S_IFREG);
+
+	return false;
+}
+
+
+bool fs_exists( const char* path )
+{
+	return (access( path, 0 ) != -1);
+}
+
+
+// BROKEN !!!!
+std::string fs_get_filename( const std::string &path )
+{
+	size_t i = path.length();
+	for ( ; i > 0; i-- )
+	{
+		if ( path[i] == '/' || path[i] == '\\' )
+			break;
+	}
+
+	return path.substr( std::min(i+1, path.length()), path.length() );
+}
+
+
+std::string fs_get_file_ext( const std::string &path )
+{
+	const char *dot = strrchr( path.c_str(), '.' );
+	if ( !dot || dot == path )
+		return "";
+
+	return dot + 1;
+}
+
+
+std::string fs_remove_ext( const std::string& path )
+{
+	size_t i = path.length();
+	for ( ; i > 0; i-- )
+	{
+		if ( path[i] == '.' )
+			break;
+	}
+
+	return path.substr( 0, i );
+}
+

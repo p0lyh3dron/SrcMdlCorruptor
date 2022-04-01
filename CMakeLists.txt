@@ -6,6 +6,8 @@ set( SRC_FILES
   src/main.cpp
   src/mdl.cpp
   src/mdl.h
+  src/mdl_funcs.cpp
+  src/mdl_funcs.h
   
   src/util.cpp
   src/util.h

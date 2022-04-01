@@ -31,7 +31,9 @@
 
 
 // ==============================================================================
-// Short Types
+// Shorter Types
+
+using byte = unsigned char;
 
 using u8  = unsigned char;
 using u16 = unsigned short;
@@ -163,6 +165,18 @@ bool            ToDouble2( const std::string &value, double &out );
 bool            ToLong2( const std::string &value, long &out );
 
 std::string     ToString( float value );
+
+
+// ==============================================================================
+// Filesystem functions
+
+
+bool fs_is_file( const char* path );
+bool fs_exists( const char* path );
+
+std::string fs_get_filename( const std::string& path );
+std::string fs_get_file_ext( const std::string& path );
+std::string fs_remove_ext( const std::string& path );
 
 
 // ==============================================================================

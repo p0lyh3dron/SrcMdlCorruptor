@@ -2,6 +2,7 @@
 #include "util.h"
 
 #include "mdl.h"
+#include "mdl_funcs.h"
 
 
 void vec3_test()
@@ -26,7 +27,24 @@ auto main( const int argc, char** argv ) -> int
 {
 	cmdline.Init( argc, argv );
 
-	vec3_test();
+	// vec3_test();
+
+	const std::string& mdlPath = cmdline.GetValue( "-i" );
+	if ( mdlPath == "" )
+	{
+		fputs( "Error: no input path specified! (-i PATH)\n", stdout );
+		return 1;
+	}
+
+	const std::string& mdlOut = cmdline.GetValue( "-o" );
+	if ( mdlOut == "" )
+	{
+		fputs( "Error: no output path specified! (-o PATH)\n", stdout );
+		return 1;
+	}
+
+	Model* test = mdl_load( mdlPath );
+	mdl_write( test, mdlOut.c_str() );
 
 	return 0;
 }
