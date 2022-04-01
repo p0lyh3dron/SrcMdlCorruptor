@@ -20,7 +20,7 @@ public:
 	void                                        Init( int argc, char *argv[] );
 	int                                         GetIndex( const std::string& search );
 	constexpr const std::vector<std::string>&   GetArgs(  );
-	constexpr size_t                            GetCount(  );
+	size_t                                      GetCount(  );
 
 	bool                                        Find( const std::string& search );
 

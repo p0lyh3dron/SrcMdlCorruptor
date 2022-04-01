@@ -8,6 +8,8 @@
 
 #include <vector>
 #include <string>
+/* Linux memcmp.  */
+#include <cstring>
 #include <algorithm>
 
 #include <time.h>
