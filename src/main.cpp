@@ -44,6 +44,7 @@ auto main( const int argc, char** argv ) -> int
 	}
 
 	Model* test = mdl_load( mdlPath );
+	mdl_randomize_fps( test );
 	mdl_write( test, mdlOut.c_str() );
 
 	return 0;

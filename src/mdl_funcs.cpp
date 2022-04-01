@@ -137,9 +137,25 @@ void mdl_write( Model* mdl, const char* path )
 // ---------------------------------------------------------------------
 // basic corrupting stuff
 
-void mdl_randomize_fps( Model* mdl, const std::string& path )
-{
 
+void incremental_corrupt( void *spBuf, int sStart, int sEnd, int sIncrement, int sIncrementCount )
+{
+	int *pBuf = ( int* )spBuf;
+
+	for ( int i = sStart; i < sEnd; i += sIncrement )
+	{
+		pBuf[ i ] += sIncrementCount;
+	}
+}
+
+void mdl_randomize_fps( Model* mdl )
+{
+	/*
+	 *    For demez: Make a buffer the fps values, and corrupt this buffer, instead
+	 *    of corrupting the animation descriptors. This might require some memory
+	 *    spaghetti and extra functions, but it will only modify the fps values.
+	 */
+	incremental_corrupt( mdl->aAnimDescs, 0, mdl->aHeader->localanim_count, 32, rand() % 100 );
 }
 
 
