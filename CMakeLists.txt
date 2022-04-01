@@ -4,10 +4,12 @@ project( SourceMDLCorrupter )
 
 set( SRC_FILES
   src/main.cpp
+
   src/mdl.cpp
   src/mdl.h
-  src/mdl_funcs.cpp
-  src/mdl_funcs.h
+  src/mdl_data.h
+  src/corrupt.cpp
+  src/corrupt.h
   
   src/util.cpp
   src/util.h

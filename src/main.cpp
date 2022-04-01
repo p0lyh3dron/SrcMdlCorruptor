@@ -2,7 +2,6 @@
 #include "util.h"
 
 #include "mdl.h"
-#include "mdl_funcs.h"
 
 
 void vec3_test()
@@ -44,8 +43,15 @@ auto main( const int argc, char** argv ) -> int
 	}
 
 	Model* test = mdl_load( mdlPath );
+
+	if ( !test )
+		return 1;
+
 	mdl_randomize_fps( test );
+
 	mdl_write( test, mdlOut.c_str() );
+
+	printf( "Model written to \"%s\"\n", mdlOut.c_str() );
 
 	return 0;
 }

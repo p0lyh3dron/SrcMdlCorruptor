@@ -231,6 +231,7 @@ bool fs_exists( const char* path )
 // BROKEN !!!!
 std::string fs_get_filename( const std::string &path )
 {
+	// NOTE: could probably be faster with some strchr func, idk
 	size_t i = path.length();
 	for ( ; i > 0; i-- )
 	{
@@ -238,6 +239,7 @@ std::string fs_get_filename( const std::string &path )
 			break;
 	}
 
+	// +1 is breaking it if i just pass in a filename? hmm, idk
 	return path.substr( std::min(i+1, path.length()), path.length() );
 }
 
