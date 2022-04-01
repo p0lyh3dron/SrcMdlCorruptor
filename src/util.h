@@ -162,3 +162,19 @@ bool            ToLong2( const std::string &value, long &out );
 
 std::string     ToString( float value );
 
+
+// ==============================================================================
+// Other useful types
+
+class vec3
+{
+public:
+	float x{}, y{}, z{};
+
+	constexpr float operator[]( int i )
+	{
+		// index into memory where vars are stored, and clamp to not read garbage
+		return *(&x + std::clamp( i, 0, 2 ));
+	}
+};
+
