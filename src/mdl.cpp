@@ -150,14 +150,11 @@ void incremental_corrupt( void *spBuf, int sStart, int sEnd, int sIncrement, int
 	}
 }
 
-template< typename T >
+template< typename TArr, typename T >
 void incremental_corrupt_arr( void *spArr, int sStride, int sStart, int sEnd, int sIncrement, T sIncrementCount )
 {
-	T *pArr = ( T* )spArr;
 	for ( int i = sStart; i < sEnd * sStride; i += sIncrement * sStride )
-	{
-		pArr[ i ] += sIncrementCount;
-	}
+		*( TArr* )( spArr + i ) += sIncrementCount;
 }
 
 void mdl_randomize_fps( Model* mdl )
@@ -167,5 +164,5 @@ void mdl_randomize_fps( Model* mdl )
 	 *    of corrupting the animation descriptors. This might require some memory
 	 *    spaghetti and extra functions, but it will only modify the fps values.
 	 */
-	incremental_corrupt_arr( &( mdl->aAnimDescs->fps ), sizeof( mdl->aAnimDescs[ 0 ] ), 0, mdl->aHeader->localanim_count, 1, ( char )rand() % 100 );
+	incremental_corrupt_arr< float >( &( mdl->aAnimDescs->fps ), sizeof( mdl->aAnimDescs[ 0 ] ), 0, mdl->aHeader->localanim_count, 1, ( float )( rand() % 100 ) - 29 );
 }
