@@ -24,6 +24,8 @@ void vec3_test()
 
 auto main( const int argc, char** argv ) -> int
 {
+	srand( time( 0 ) );
+
 	cmdline.Init( argc, argv );
 
 	// vec3_test();
